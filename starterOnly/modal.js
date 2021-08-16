@@ -13,6 +13,7 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeModalBtn = document.querySelectorAll("#close");
 const form = document.querySelector("#form");
+const modalContent = document.querySelector(".content");
 
 /*EVENTS below*/
 
@@ -48,46 +49,74 @@ const location3 = document.querySelector("#location3");
 const location4 = document.querySelector("#location4");
 const location5 = document.querySelector("#location5");
 const location6 = document.querySelector("#location6");
-
 const checkBox1 = document.querySelector("#checkbox1");
 const checkBox2 = document.querySelector("#checkbox2");
 
 //Regex pour validzer les données souhaitées
 
-const textInput = /^[a-zA-Z]{2,}$/;
-const numberInput = /^[0-9]{1,}/;
-const mailInput = /^([a-zA-Z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/;
+const textInput = new RegExp(/[a-z]{2,}$/i);
+const numberInput = new RegExp(/^[0-9]{1,}/);
+const mailInput = new RegExp(/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/i);
+
+// création d'un élémént paragraphe
+
+const paragraph = document.createElement("p");
+
+//fonction pour créer un messages d'erreur
+
+const editMessage = (elParent, classe, err) => {
+
+  //ajout contenu dans paragraphe créer ci-dessus
+  paragraph.textContent = err;
+
+  // ajout de la classe erreur crée en css (ligne 529)
+  para.classList.add(classe);
+
+// ajout du paragraĥe comme dernier élément de l'element formdata
+  elParent.appendChild(paragraph);
+}
 
 //validation des entrées du formulaire
 
 form.addEventListener('submit', (e) => {
   //variable de stockage messages d'erreur
   e.preventDefault();
-  let erreur;
+ 
+  let message;
   //avertissement erreur si valeur firstName retourné différente de la regex
   if (firstName.value != firstName.value.test(textInput)){
-    erreur = "Veuillez renseigner un prénom valide avec minimum 2 lettres";
+    message = "Veuillez renseigner un prénom valide avec minimum 2 lettres";
+
+    //appel de la fonction d'erreur
+    editMessage(formData[0], "erreur", message);
 
     //vérification de la validation de l'entée sur la console
     console.log("Veuillez renseigner un prénom valide avec minimum 2 lettres");
   }
   //avertissement erreur si valeur lastName retournée différente de la regex
   else if (lastName.value != lastName.value.test(textInput)){
-    erreur = "Veuillez renseigner un nom valide avec minimum 2 lettres";
+    message = "Veuillez renseigner un nom valide avec minimum 2 lettres";
+    editMessage(formData[1], "erreur", message);
 
     //vérification de la validation de l'entée sur la console
     console.log("Veuillez renseigner un nom valide avec minimum 2 lettres");
   }
   //avertissement erreur si valeur mail retournée différente de la regex
   else if (email.value != email.value.test(mailInput)){
-    erreur = "Veuillez renseigner une  adresse mail valide";
+    message = "Veuillez renseigner une  adresse mail valide";
+    editMessage(formData[2], "erreur", message);
 
     //vérification de la validation de l'entée sur la console
     console.log("Veuillez renseigner une adresse mail valide");
   }
+  else if (!birthdate.value){
+    message = "Veuillez renseigner votre date de naissance";
+    editMessage(formData[3], "erreur", message);
+  }
   //avertissement erreur si valeur quantity tournament retournée différente de la regex
   else if (quantityTournament.value != quantityTournament.value.test(numberInput)){
-    erreur = "Veuillez indiquer le nombre de participation,si première fois indiquer 0";
+    message = "Veuillez indiquer le nombre de participation,si première fois indiquer 0";
+    editMessage(formData[4], "erreur", message);
 
     //vérification de la validation de l'entée sur la console
     console.log("Veuillez indiquer le nombre de participation,si nouveau participant indiquer 0");
@@ -100,16 +129,21 @@ form.addEventListener('submit', (e) => {
     !location4.checked &&
     !location5.checked &&
     !location6.checked
-  ){
-    erreur ="Veuillez sélectionner une ville";
-    //Permet de tester la validation de l'entrée sur la console
-    console.log("Veuillez indiqué une ville");
+  )
+  {
+    message ="Veuillez sélectionner une ville";
+    editMessage(formData[5], "erreur", message);
+
+    //verification de la validation de l'entrée sur la console
+    console.log("Veuillez indiquer une ville");
   }
 
   //cdg sont pas acceptées  alors avertissement erreur
   else if (!checkBox1.checked){
-    erreur = "Veuillez accepter les conditions générales de vente";
-    //Permet de tester la validation de l'entrée sur la console
+    message = "Veuillez accepter les conditions générales de vente";
+    editMessage(formData[6], "erreur", message);
+
+    //verification de  la validation de l'entrée sur la console
     console.log("Vous devez acceptez les conditions générales de vente");
   }
 
@@ -127,15 +161,15 @@ form.addEventListener('submit', (e) => {
     location4.checked ||
     location5.checked ||
     location6.checked &&
-    checkBox1.checked 
+    checkBox1.checked === true 
   ) {
     alert("INSCRIPTION ENVOYEE AVEC SUCCES");
 
   } 
-  // sinon command par défault d'envoi du formulaire stoppée => erreur
+  // sinon commande par défault d'envoi du formulaire stoppée 
+
   else {
     e.preventDefault();
-    formData.innerHTML = error;
     return 0;
   }  
 });
