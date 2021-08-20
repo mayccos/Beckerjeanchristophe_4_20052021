@@ -12,7 +12,7 @@
     />
   </head>
   <body>
-    <div class="topnav" id="myTopnav">
+    <div class="topNav" id="myTopNav">
       <div class="header-logo">
         <img alt="logo" src="Logo.png"/>
       </div>
@@ -50,16 +50,15 @@
         </button>
       </div>
 
-      <div class="bground">
+      <div class="bgRound">
         <div class="content">
           <span class="close" id="close"></span>
           <div class="modal-body">
             <form
               name="reserve"
               action="index.html"
-              method="POST"
-              id="form"
-            >
+              method="get"
+              id="reserve">
               <div
                 class="formData">
                 <label for="first">Prénom</label><br>
@@ -70,6 +69,7 @@
                   name="first"
                 /><br>
               </div>
+              <div class="error" id="firstError"></div>
               <div
                 class="formData">
                 <label for="last">Nom</label><br>
@@ -79,6 +79,7 @@
                   id="last"
                   name="last"
                 /><br>
+                <div class="error" id="lastError"></div>
               </div>
               <div
                 class="formData">
@@ -89,21 +90,24 @@
                   id="email"
                   name="email"
                 /><br>
+                <div class="error" id="emailError"></div>
               </div>
               <div
                 class="formData">
-                <label for="birthdate">Date de naissance</label><br>
+                <label for="birthDate">Date de naissance</label><br>
                 <input
                   class="text-control"
                   type="date"
-                  id="birthdate"
-                  name="birthdate"
+                  id="birthDate"
+                  name="birthDate"
                 /><br>
+                <div class="error" id="birthDateError"></div>
               </div>
               <div
                 class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
+                <div class="error" id="quantityError"></div>
               </div>
               <p class="text-label">Quelles villes ?</p>
               <div
@@ -172,8 +176,9 @@
                 />
                 <label class="checkbox-label" for="location6">
                   <span class="checkbox-icon"></span>
-                  Portland</label
-                >
+                  Portland</label>
+                
+                <div class="error" id="locationError"></div>
               </div>
 
               <div
@@ -187,6 +192,7 @@
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
+                <div class="error" id="cguError"></div>
                 <br>
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
@@ -196,12 +202,17 @@
                 <br>
               </div>
               <input
-                class="btn-submit"
+                id="submit"
+                class="button btn-submit"
                 type="submit"
                 value="C'est parti"
               />
             </form>
           </div>
+          <div id="confirmationMsg">Félicitation !
+              <br>Inscription validée.
+          </div>  
+          <input id="closeConfirmation" class="button btn-submit" type="button" value="Close">
         </div>
       </div>
     </main>
