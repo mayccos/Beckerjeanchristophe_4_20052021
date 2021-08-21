@@ -64,20 +64,16 @@ img {
   font-family: Roboto, sans-serif;
 }
 
-.topNav a:hover {
+.topNav a:hover , .topNav a.active{
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
 }
 
-.topNav a.active {
-  background-color: #ff0000;
-  color: #ffffff;
-  border-radius: 15px;
-}
 
 .topNav .icon {
   display: none;
+  
 }
 
 
@@ -149,10 +145,10 @@ main {
 }
 #confirmationMsg{
   display: flex;
-  align-items: center;
-  height: 80%;
   
-  margin: 0 0px;
+  height: 80%;
+  text-align: center;
+  margin: 0 22%;
 }
 
 .content {
@@ -468,7 +464,7 @@ footer {
   margin: 0 20px;
 }
 /*media query tablet*/
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -509,41 +505,63 @@ footer {
   }
 }
 /*media query mobile*/
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 540px) {
+  .topNav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .topNav .icon{
+    background-color: #ff0000;
+    color: #ffffff;
+    border-radius: 15px;
+    
+  }
   .topNav a {
     display: none;
+  }
+  .topNav a.active {
+    border-radius: 15px;
   }
   .topNav a.icon {
     float: right;
     display: block;
+    
   }
   .topNav.responsive {
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
   }
   .topNav.responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
+    
   }
   .topNav.responsive a {
     float: none;
     display: block;
     text-align: left;
   }
+  .main-navbar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-align: center;
+    
+  }
+  .main-navbar a{
+    text-decoration: none;
+    color: #000;
+  }
+  .main-navbar a.active , .main-navbar a.icon{
+    background-color: #ff0000;
+    color: #ffffff;
+    border-radius: 15px;
+  }
+  
 }
-
-
-
- @media screen and (max-width: 540px) {
-  .topNav a {
-    display: none;
-  }
-  .topNav a.icon {
-    float: right;
-    display: block;
-  }
-} 
-
 
 @media screen and (max-width: 462px) {
   .hero-text , .hero-headline{
@@ -553,10 +571,11 @@ footer {
 }
 @media screen and (max-width: 340px) {
   .header-logo{
+    
     width: 10%;
   }
-  .topNav a.icon{
-    margin-right: -10px;
+  .header-logo img{
+    max-width: 180px;
   }
   .hero-text , .hero-headline{
     margin-left: -20px;
