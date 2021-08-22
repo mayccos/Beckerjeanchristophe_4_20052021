@@ -225,7 +225,7 @@ function validate(event){
   if(formValid === true) {
     form.style.display = "none";
     confirmationMsg.style.fontSize = "30px";
-    confirmationMsg.style.textAlign = "left";
+    confirmationMsg.style.textAlign = "center";
     
     closeBtnConfirm.style.display = "block";
     submitBtn.style.display = "none";
